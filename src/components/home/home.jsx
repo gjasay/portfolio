@@ -6,7 +6,7 @@ import React from 'react';
 const Header = () => {
     return (
         <div>
-            <p>some text</p>
+            <p>Hello World!</p>
         </div>
     );
 };
