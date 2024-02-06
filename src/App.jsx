@@ -10,9 +10,11 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
+    <div id='app'>
       <BrowserRouter>
-        <Header />
+        <div id='header'>
+          <Header />
+        </div>
         <Routes>
           <Route path="/" Component={Home} />
         </Routes>
