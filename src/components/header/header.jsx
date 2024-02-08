@@ -7,20 +7,31 @@ import './header.css'
 const Header = () => {
     return (
         <div id='header'>
-            <Canvas  camera={{ fov: 80, position: [0, 0, 7]}} onClick={e => console.log('clicky clack')}>
-                {/* <Perf position="top-left" /> */}
-                <OrbitControls makeDefault />
-                <ambientLight />
-                <pointLight position={[1, 1.5, 1]} />
-                <Float
-                speed={5}>
-                    <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-6,0,0]} scale={[2,2,1]} > 
-                        Gabe Asay
-                        <meshStandardMaterial attach="material" color='#FFBA49' />
-                    </Text3D>
-                    <Box />
-                </Float>
-            </Canvas>
+            <div id='name'>
+                <Canvas  camera={{ fov: 60, position: [0, 1, 8]}}>
+                    {/* <Perf position="top-left" /> */}
+                    <OrbitControls makeDefault />
+                    <spotLight intensity={150} position={[0, 3, 8]} decay={2} angle={Math.PI/2}/>
+                    <ambientLight position={[10,0,0]} intensity={0.9}/>
+
+                    <Float
+                    speed={5}>
+                        <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-6,1,0]} scale={[2,2,1]} onClick={e => console.log('clicky clack')}> 
+                            Gabe Asay
+                            <meshStandardMaterial attach="material" color='#B1EDE8' />
+                        </Text3D>
+                        <Box />
+                    </Float>
+                    <mesh position={[0, -3, 2]}>
+                        <boxGeometry args={[window.innerWidth/5, 1, 8]} />
+                        <meshStandardMaterial attach="material" color='#6D435A' />
+                    </mesh>
+                    <mesh position={[0, 2, -2.5]}>
+                        <boxGeometry args={[window.innerWidth/5, 12, 1]} />
+                        <meshStandardMaterial attach="material" color='#6D435A' />
+                    </mesh>
+                </Canvas>
+            </div>
             
         </div>
     );
@@ -28,11 +39,9 @@ const Header = () => {
 
 function Box() {
     return(
-        <mesh
-        position={[0.25,0.65,-0.5]}
-        scale={[1,1,1]}>
-            <RoundedBox args={[15, 4, 1]} radius={1.2}>
-                <meshStandardMaterial attach="material" color='#EF5B5B' />
+        <mesh position={[0, -1, 0]}>
+            <RoundedBox args={[15, 1, 2.5]} radius={.5}>
+                <meshStandardMaterial attach="material" color='#FF6978' />
             </RoundedBox>
         </mesh>
     )
