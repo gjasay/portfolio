@@ -1,4 +1,4 @@
-#header {
+#main {
     display: flex;
     justify-content: center;
     background-color: #6D435A;
@@ -11,4 +11,11 @@
   height: 100%;
   margin: auto;
   cursor: pointer;
+}
+
+.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6D435A;
 }
