@@ -9,12 +9,12 @@ const TEXT_COLOR = '#FFF7EB';
 const BACKGROUND_COLOR = '#003459';
 const WINDOW_COLOR = '#F4D35E';
 
-const ABOUT_TEXT = `I'm Gabe, a passionate developer in C# and Unity,
-bringing a dedicated enthusiasm for game development. Proficient in both C# for
-game development and JavaScript for web development, I'm driven to excel in
+const ABOUT_TEXT = `I'm Gabe, a passionate developer in C# and Unity, bringing a dedicated 
+enthusiasm for game development. Proficient in both C# for game 
+development and JavaScript for web development, I'm driven to excel in
 full-time Developer roles. Eager to contribute my skills and passion to
-innovative projects, I'm committed to making a meaningful impact and eager to
-embark on new professional opportunities.
+innovative projects, I'm committed to making a meaningful impact and 
+eager to embark on new professional opportunities.
 `
 
 const Main = () => {
