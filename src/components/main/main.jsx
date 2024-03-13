@@ -54,9 +54,9 @@ const Main = () => {
 
     const items = Array.from({ length: 8 }, (_, i) => {
         const angle = (i / 8) * 2 * Math.PI;
-        const x = Math.cos(angle) * (window.innerWidth > window.innerHeight ? 15 : 10); // reduced distance from center
-        const y = Math.sin(angle) * (window.innerWidth > window.innerHeight ? 15 : 10); // reduced distance from center
-        return <Item key={i} pos={[x, y, 0]} scale={window.innerWidth > window.innerHeight ? [4, 4, 4] : [2, 2, 2]} texture={textures[i % textures.length]} url={urls[i % urls.length]} setShowAbout={setShowAbout} showAbout={showAbout}/>;
+        const x = Math.cos(angle) * (window.innerWidth > window.innerHeight ? 15 : 8); // reduced distance from center
+        const y = Math.sin(angle) * (window.innerWidth > window.innerHeight ? 15 : 8); // reduced distance from center
+        return <Item key={i} pos={[x, y, 0]} scale={window.innerWidth > window.innerHeight ? [4, 4, 4] : [2.5, 2.5, 2.5]} texture={textures[i % textures.length]} url={urls[i % urls.length]} setShowAbout={setShowAbout} showAbout={showAbout}/>;
     });
 
     return (
@@ -127,7 +127,7 @@ function About({setShowAbout}) {
 
     return(
         <mesh ref={aboutRef} className="about">
-            <Float speed={5} floatIntensity={0.5} rotationIntensity={0.1}>
+            <Float speed={5} floatIntensity={0.5} rotationIntensity={0.1} scale={window.innerWidth < window.innerHeight ? [0.5,0.5,1] : [1,1,1]}>
             <mesh position={[0,0,5]}>
                 <RoundedBox args={[40, 40]} radius={1}>
                 <meshStandardMaterial attach="material" color={WINDOW_COLOR} />
