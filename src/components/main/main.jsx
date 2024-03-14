@@ -4,10 +4,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './main.css'
 
-const BOX_COLOR = '#007EA7';
-const TEXT_COLOR = '#FFF7EB';
-const BACKGROUND_COLOR = '#003459';
-const WINDOW_COLOR = '#F4D35E';
+const BOX_COLOR = '#3C7A89';
+const TEXT_COLOR = '#FFFFFF';
+const BACKGROUND_COLOR = '#16262E';
+const WINDOW_COLOR = '#3C7A89';
 
 const ABOUT_TEXT = `I'm Gabe, a passionate developer in C# and Unity, bringing a dedicated 
 enthusiasm for game development. Proficient in both C# for game 
@@ -73,16 +73,16 @@ const Main = () => {
     return (
         <div id='main'>
             <Canvas camera={{ fov: 60, position: cameraPosition }}>
-                <spotLight intensity={150} position={[0, 3, 8]} angle={Math.PI/2}/>
-                <ambientLight position={[10,0,0]} intensity={1.75}/>
+                {/* <spotLight intensity={10} position={[0, 3, 8]} angle={Math.PI/2}/> */}
+                <ambientLight position={[10,0,0]} intensity={2.25}/>
                 {/* <OrbitControls /> */}
                 <Float speed={5}>
-                    <Text3D onClick={handleClick} font={'fonts/optimer_bold.typeface.json'} position={window.innerWidth > window.innerHeight ? [-4,1,0] : [-2.5,0,0]} scale={window.innerWidth > window.innerHeight ? [1.5,1.5,1] : [1,1,1]}> 
+                    <Text3D onClick={handleClick} font={'fonts/optimer_bold.typeface.json'} position={window.innerWidth > window.innerHeight ? [-3.9,-0.1,0] : [-2.5,0,0]} scale={window.innerWidth > window.innerHeight ? [1.5,1.5,1] : [1,1,1]}> 
                         Click Me!
                         <meshStandardMaterial attach="material" color={TEXT_COLOR} />
                     </Text3D>
                     
-                    <mesh position={window.innerWidth > window.innerHeight ? [0.5, 1.75, -0.65] : [0.5, 0.5, -0.65]} onClick={overlay ? null : handleClick} onPointerOver={() => overlay ? null : document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
+                    <mesh position={window.innerWidth > window.innerHeight ? [0.5, 0.5, -0.65] : [0.5, 0.5, -0.65]} onClick={overlay ? null : handleClick} onPointerOver={() => overlay ? null : document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
                         <Box />
                     </mesh>
                 </Float>
@@ -123,7 +123,11 @@ function Item({pos, scale, texture, url, setShowAbout, showAbout, setShowContact
             setShowContact(true);
             overlay=true;
         } else {
-            window.open(url, "_blank");
+            if (url === 'https://projects.gabeasay.dev/#unity-csharp' || url === 'https://projects.gabeasay.dev/#javascript' || url === 'https://projects.gabeasay.dev/') {
+                window.location.href = url;
+            } else {
+                window.open(url, "_blank");
+            }
         }
     };
     return(
@@ -195,9 +199,13 @@ function Contact({setShowContact}) {
                 </RoundedBox>
             </mesh>
             
-            <mesh onClick={() => {
+            <mesh 
+            onClick={() => {
                 gsap.to(contactRef.current.scale, { x: 0, y: 0, z: 0, duration: .35, onComplete: () => {setShowContact(false); overlay=false;} });
-            }} onPointerOver={() => document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
+            }} 
+            onPointerOver={() => document.body.style.cursor = 'pointer'} 
+            onPointerOut={() => document.body.style.cursor = 'auto'}
+        >
                 <RoundedBox position={[16,17,6]} args={[5, 5]} radius={1}>
                     <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
                 </RoundedBox>
