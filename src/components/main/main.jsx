@@ -50,7 +50,7 @@ const Main = () => {
     };
 
     const textures = ['icons/github.png', 'icons/linkedin.png', 'icons/medium.png', 'icons/unity.png', 'icons/javascript.png', 'icons/about.png', 'icons/projects.png', 'icons/contact.png'];
-    const urls = ['https://github.com/gjasay', 'https://www.linkedin.com/in/gabriel-asay/', 'https://medium.com/@gabeasay', 'https://unity.com', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', 'https://github.com', 'https://github.com', 'https://github.com'];
+    const urls = ['https://github.com/gjasay', 'https://www.linkedin.com/in/gabriel-asay/', 'https://medium.com/@gabeasay', 'https://projects.gabeasay.dev/#unity-csharp', 'https://projects.gabeasay.dev/#javascript', 'https://placeholder.com', 'https://projects.gabeasay.dev/', 'https://placeholder.com'];
 
     const items = Array.from({ length: 8 }, (_, i) => {
         const angle = (i / 8) * 2 * Math.PI;
