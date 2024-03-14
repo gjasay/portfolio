@@ -16,6 +16,16 @@ full-time Developer roles. Eager to contribute my skills and passion to
 innovative projects, I'm committed to making a meaningful impact and 
 eager to embark on new professional opportunities.
 `
+const CONTACT_TEXT = `Email: gabeasay@gmail.com
+
+
+Phone: 804-210-0530
+
+
+LinkedIn: linkedin.com/in/gabriel-asay
+`
+
+let overlay = false;
 
 const Main = () => {
     const [hovered, setHovered] = useState(false);
@@ -23,6 +33,7 @@ const Main = () => {
     const [cameraPosition, setCameraPosition] = useState([0, 1, 50]);
     const ringRef = useRef();
     const [showAbout, setShowAbout] = useState(false);
+    const [showContact, setShowContact] = useState(false);
 
     useEffect(() => {
         document.body.style.cursor = hovered ? 'pointer' : 'auto'
@@ -56,7 +67,7 @@ const Main = () => {
         const angle = (i / 8) * 2 * Math.PI;
         const x = Math.cos(angle) * (window.innerWidth > window.innerHeight ? 15 : 8); // reduced distance from center
         const y = Math.sin(angle) * (window.innerWidth > window.innerHeight ? 15 : 8); // reduced distance from center
-        return <Item key={i} pos={[x, y, 0]} scale={window.innerWidth > window.innerHeight ? [4, 4, 4] : [2.5, 2.5, 2.5]} texture={textures[i % textures.length]} url={urls[i % urls.length]} setShowAbout={setShowAbout} showAbout={showAbout}/>;
+        return <Item key={i} pos={[x, y, 0]} scale={window.innerWidth > window.innerHeight ? [4, 4, 4] : [2.5, 2.5, 2.5]} texture={textures[i % textures.length]} url={urls[i % urls.length]} setShowAbout={setShowAbout} showAbout={showAbout} setShowContact={setShowContact}/>;
     });
 
     return (
@@ -71,7 +82,7 @@ const Main = () => {
                         <meshStandardMaterial attach="material" color={TEXT_COLOR} />
                     </Text3D>
                     
-                    <mesh position={window.innerWidth > window.innerHeight ? [0.5, 1.75, -0.65] : [0.5, 0.5, -0.65]} onClick={showAbout ? null : handleClick} onPointerOver={() => showAbout ? null : document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
+                    <mesh position={window.innerWidth > window.innerHeight ? [0.5, 1.75, -0.65] : [0.5, 0.5, -0.65]} onClick={overlay ? null : handleClick} onPointerOver={() => overlay ? null : document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
                         <Box />
                     </mesh>
                 </Float>
@@ -84,6 +95,9 @@ const Main = () => {
                 </mesh> 
                 {showAbout && (
                     <About setShowAbout={setShowAbout} />
+                )}
+                {showContact && (
+                    <Contact setShowContact={setShowContact} />
                 )}
             </Canvas>
         </div>
@@ -98,19 +112,23 @@ function Box() {
     )
 }
 
-function Item({pos, scale, texture, url, setShowAbout, showAbout}) {
+function Item({pos, scale, texture, url, setShowAbout, showAbout, setShowContact}) {
     const textureMap = useTexture(texture);
 
     const handleClick = () => {
         if (texture === 'icons/about.png') {
             setShowAbout(true);
+            overlay=true;
+        } else if (texture === 'icons/contact.png') {
+            setShowContact(true);
+            overlay=true;
         } else {
             window.open(url, "_blank");
         }
     };
     return(
         <Float speed={3}>
-            <mesh position={pos} scale={scale} onClick={showAbout ? null : handleClick} onPointerOver={() => showAbout ? null : document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
+            <mesh position={pos} scale={scale} onClick={overlay ? null : handleClick} onPointerOver={() => overlay ? null : document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
                 <boxGeometry />
                 <meshBasicMaterial attach="material" map={textureMap} />
             </mesh>
@@ -135,11 +153,14 @@ function About({setShowAbout}) {
             </mesh>
             
             <mesh onClick={() => {
-                gsap.to(aboutRef.current.scale, { x: 0, y: 0, z: 0, duration: .35, onComplete: () => setShowAbout(false) });
+                gsap.to(aboutRef.current.scale, { x: 0, y: 0, z: 0, duration: .35, onComplete: () => {setShowAbout(false); overlay=false;} });
             }} onPointerOver={() => document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
-                <Text3D font={'fonts/optimer_bold.typeface.json'} position={[15,16,6]} scale={[4,3,5]}>
+                <RoundedBox position={[16,17,6]} args={[5, 5]} radius={1}>
+                    <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
+                </RoundedBox>
+                <Text3D font={'fonts/optimer_bold.typeface.json'} position={[14.5,15.6,6]} scale={[4,3,5]}>
                     X
-                    <meshStandardMaterial attach="material" color={"Black"} />
+                    <meshStandardMaterial attach="material" color={TEXT_COLOR} />
                 </Text3D>
             </mesh>
                 <RoundedBox position={[0,17,6]} args={[15, 5]} radius={1}>
@@ -154,6 +175,49 @@ function About({setShowAbout}) {
                 <meshStandardMaterial attach="material" color={"Black"} />
             </Text3D>
         </Float>
+        </mesh>
+    )
+}
+
+function Contact({setShowContact}) {
+    const contactRef = useRef();
+
+    useEffect(() => {
+        gsap.fromTo(contactRef.current.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: 1 });
+    }, []);
+
+    return(
+        <mesh ref={contactRef} className="contact">
+            <Float speed={5} floatIntensity={0.5} rotationIntensity={0.1} scale={window.innerWidth < window.innerHeight ? [0.5,0.5,1] : [1,1,1]}>
+            <mesh position={[0,0,5]}>
+                <RoundedBox args={[40, 40]} radius={1}>
+                <meshStandardMaterial attach="material" color={WINDOW_COLOR} />
+                </RoundedBox>
+            </mesh>
+            
+            <mesh onClick={() => {
+                gsap.to(contactRef.current.scale, { x: 0, y: 0, z: 0, duration: .35, onComplete: () => {setShowContact(false); overlay=false;} });
+            }} onPointerOver={() => document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
+                <RoundedBox position={[16,17,6]} args={[5, 5]} radius={1}>
+                    <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
+                </RoundedBox>
+                <Text3D font={'fonts/optimer_bold.typeface.json'} position={[14.5,15.6,6]} scale={[4,3,5]}>
+                    X
+                    <meshStandardMaterial attach="material" color={TEXT_COLOR} />
+                </Text3D>
+            </mesh>
+                <RoundedBox position={[0,17,6]} args={[17, 5]} radius={1}>
+                    <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
+                </RoundedBox>
+            <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-7.1,16,6]} scale={[2,2,3]}>
+                Contact Me
+                <meshStandardMaterial attach="material" color={TEXT_COLOR} />
+            </Text3D>
+            <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-18.5,6,6]} scale={[1.5,1.5,1.2]}> 
+                {CONTACT_TEXT}                
+                <meshStandardMaterial attach="material" color={"Black"} />
+            </Text3D>
+            </Float>
         </mesh>
     )
 }
