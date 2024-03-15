@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './main.css'
-import { Text } from 'pixi.js';
 
 const BUTTON_COLOR = '#B71C1C'; // A dark red
 const TEXT_COLOR = '#ECEFF1'; // A very light grey for maximum contrast
