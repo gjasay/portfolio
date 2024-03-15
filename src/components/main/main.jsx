@@ -3,11 +3,15 @@ import { Canvas } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import './main.css'
+import { Text } from 'pixi.js';
 
-const BOX_COLOR = '#3C7A89';
-const TEXT_COLOR = '#FFFFFF';
-const BACKGROUND_COLOR = '#16262E';
-const WINDOW_COLOR = '#3C7A89';
+const BUTTON_COLOR = '#B71C1C'; // A dark red
+const TEXT_COLOR = '#ECEFF1'; // A very light grey for maximum contrast
+const BACKGROUND_COLOR = '#212121'; // A dark grey, almost black
+const WINDOW_COLOR = '#424242'; // A medium grey
+
+const TEXT_FONT = 'fonts/Poppins_Regular.json';
+const BUTTON_FONT = 'fonts/Poppins_Bold.json';
 
 const ABOUT_TEXT = `I'm Gabe, a passionate developer in C# and Unity, bringing a dedicated 
 enthusiasm for game development. Proficient in both C# for game 
@@ -18,9 +22,7 @@ eager to embark on new professional opportunities.
 `
 const CONTACT_TEXT = `Email: gabeasay@gmail.com
 
-
 Phone: 804-210-0530
-
 
 LinkedIn: linkedin.com/in/gabriel-asay
 `
@@ -77,8 +79,8 @@ const Main = () => {
                 <ambientLight position={[10,0,0]} intensity={2.25}/>
                 {/* <OrbitControls /> */}
                 <Float speed={5}>
-                    <Text3D onClick={handleClick} font={'fonts/optimer_bold.typeface.json'} position={window.innerWidth > window.innerHeight ? [-3.9,-0.1,0] : [-2.5,0,0]} scale={window.innerWidth > window.innerHeight ? [1.5,1.5,1] : [1,1,1]}> 
-                        Click Me!
+                    <Text3D onClick={handleClick} font={BUTTON_FONT} position={window.innerWidth > window.innerHeight ? [-4,-0.1,0] : [-2.5,0,0]} scale={window.innerWidth > window.innerHeight ? [1.5,1.5,1] : [1,1,1]}> 
+                        Click Me
                         <meshStandardMaterial attach="material" color={TEXT_COLOR} />
                     </Text3D>
                     
@@ -107,7 +109,7 @@ const Main = () => {
 function Box() {
     return(
         <RoundedBox args={window.innerWidth > window.innerHeight ? [10, 3.5, 1] : [8, 2.5, 1]} radius={0.5}>
-            <meshStandardMaterial attach="material" color={BOX_COLOR} />
+            <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
         </RoundedBox>
     )
 }
@@ -160,23 +162,23 @@ function About({setShowAbout}) {
                 gsap.to(aboutRef.current.scale, { x: 0, y: 0, z: 0, duration: .35, onComplete: () => {setShowAbout(false); overlay=false;} });
             }} onPointerOver={() => document.body.style.cursor = 'pointer'} onPointerOut={() => document.body.style.cursor = 'auto'}>
                 <RoundedBox position={[16,17,6]} args={[5, 5]} radius={1}>
-                    <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
+                    <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
                 </RoundedBox>
-                <Text3D font={'fonts/optimer_bold.typeface.json'} position={[14.5,15.6,6]} scale={[4,3,5]}>
+                <Text3D font={BUTTON_FONT} position={[14,15.6,6]} scale={[4,3,5]}>
                     X
                     <meshStandardMaterial attach="material" color={TEXT_COLOR} />
                 </Text3D>
             </mesh>
                 <RoundedBox position={[0,17,6]} args={[15, 5]} radius={1}>
-                    <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
+                    <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
                 </RoundedBox>
-            <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-6,16,6]} scale={[2,2,3]}>
+            <Text3D font={BUTTON_FONT} position={[-6.75,16,6]} scale={[2,2,3]}>
                 About Me
                 <meshStandardMaterial attach="material" color={TEXT_COLOR} />
             </Text3D>
-            <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-18.5,12,6]} scale={[.8,.8,1.2]}> 
+            <Text3D font={TEXT_FONT} position={[-18.5,12,6]} scale={[.75,.75,1.2]}> 
                 {ABOUT_TEXT}
-                <meshStandardMaterial attach="material" color={"Black"} />
+                <meshStandardMaterial attach="material" color={TEXT_COLOR} />
             </Text3D>
         </Float>
         </mesh>
@@ -207,24 +209,54 @@ function Contact({setShowContact}) {
             onPointerOut={() => document.body.style.cursor = 'auto'}
         >
                 <RoundedBox position={[16,17,6]} args={[5, 5]} radius={1}>
-                    <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
+                    <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
                 </RoundedBox>
-                <Text3D font={'fonts/optimer_bold.typeface.json'} position={[14.5,15.6,6]} scale={[4,3,5]}>
+                <Text3D font={BUTTON_FONT} position={[14,15.6,6]} scale={[4,3,5]}>
                     X
                     <meshStandardMaterial attach="material" color={TEXT_COLOR} />
                 </Text3D>
             </mesh>
                 <RoundedBox position={[0,17,6]} args={[17, 5]} radius={1}>
-                    <meshStandardMaterial attach="material" color={BACKGROUND_COLOR} />
+                    <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
                 </RoundedBox>
-            <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-7.1,16,6]} scale={[2,2,3]}>
+            <Text3D font={BUTTON_FONT} position={[-8.25,16,6]} scale={[2,2,3]}>
                 Contact Me
                 <meshStandardMaterial attach="material" color={TEXT_COLOR} />
             </Text3D>
-            <Text3D font={'fonts/optimer_bold.typeface.json'} position={[-18.5,6,6]} scale={[1.5,1.5,1.2]}> 
+            <Text3D font={TEXT_FONT} position={[-18.5,6,6]} scale={[1.35,1.35,1.2]}> 
                 {CONTACT_TEXT}                
-                <meshStandardMaterial attach="material" color={"Black"} />
+                <meshStandardMaterial attach="material" color={TEXT_COLOR} />
             </Text3D>
+            <RoundedBox position={[14,6.5,6]} args={[8, 3]} radius={1} 
+            onClick={() => window.location.href = 'mailto:gabeasay@gmail.com'} 
+            onPointerOver={() => document.body.style.cursor = 'pointer'}
+            onPointerOut={() => document.body.style.cursor = 'auto'}>
+                <Text3D font={BUTTON_FONT} position={[-3,-0.65,0]} scale={[1.5,1.5,3]}>
+                    Email
+                    <meshStandardMaterial attach="material" color={TEXT_COLOR} />
+                </Text3D>
+                <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
+            </RoundedBox>
+            <RoundedBox position={[6.25,0.5,6]} args={[8, 3]} radius={1} 
+            onClick={() => window.location.href = 'tel:+18042100530'}
+            onPointerOver={() => document.body.style.cursor = 'pointer'}
+            onPointerOut={() => document.body.style.cursor = 'auto'}>
+                <Text3D font={BUTTON_FONT} position={[-3.35,-0.65,0]} scale={[1.5,1.5,3]}>
+                    Phone
+                    <meshStandardMaterial attach="material" color={TEXT_COLOR} />
+                </Text3D>
+                <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
+            </RoundedBox>
+            <RoundedBox position={[0,-10,6]} args={[13, 3]} radius={1} 
+            onClick={() => window.location.href = 'https://www.linkedin.com/in/gabriel-asay/'}
+            onPointerOver={() => document.body.style.cursor = 'pointer'}
+            onPointerOut={() => document.body.style.cursor = 'auto'}>
+                <Text3D font={BUTTON_FONT} position={[-4.5,-0.65,0]} scale={[1.5,1.5,3]}>
+                    LinkedIn
+                    <meshStandardMaterial attach="material" color={TEXT_COLOR} />
+                </Text3D>
+                <meshStandardMaterial attach="material" color={BUTTON_COLOR} />
+            </RoundedBox>
             </Float>
         </mesh>
     )
