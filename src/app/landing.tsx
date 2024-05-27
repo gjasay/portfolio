@@ -20,7 +20,7 @@ const Landing: FC = () => {
                         loop: true,
                         cursor: "▋",
                         delay: "natural",
-                        //@ts-expect-error SHUT UP
+                        //@ts-expect-error shut the FUCK up
                         pauseFor: 8000,   
                     }}
             />
@@ -34,14 +34,14 @@ const Landing: FC = () => {
                    always eager to learn and grow, i'm constantly exploring new ideas and techniques <br />
                 </p>
             </text>
-            <div className='text-xs sm:text-sm md:text-lg lg:text-3xl text-amber-200 flex justify-center'>
-                <a href="https://gabeasay.dev" className='px-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'>
+            <div className='text-md sm:text-md md:text-2xl lg:text-3xl text-amber-200 flex justify-center'>
+                <a href="https://github.com/gjasay" target="_blank" className='px-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'>
                     <FontAwesomeIcon icon={faGithub}/>
                 </a>
-                <a href="https://placeholder.com" className='px-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'>
+                <a href="https://www.linkedin.com/in/gabriel-asay/" target="_blank" className='px-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'>
                     <FontAwesomeIcon icon={faLinkedin} />
                 </a>
-                <a href='https://placeholder.com' className='px-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'>
+                <a href='https://medium.com/@gabeasay/' target="_blank" className='px-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110'>
                     <FontAwesomeIcon icon={faMedium} />
                 </a>
             </div>
