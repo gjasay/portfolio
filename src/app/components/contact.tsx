@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import Alert from './alert';
 
 const Contact: React.FC = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [alert, setAlert] = useState({ show: false, type: '', message: '' });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -16,8 +18,10 @@ const Contact: React.FC = () => {
         }, 'ZXsqYjAQYr7XAEFgd')
         .then((response: any) => {
             console.log('SUCCESS!', response.status, response.text);
+            setAlert({ show: true, type: 'success', message: 'message sent!' });
         }, (err: any) => {
             console.log('FAILED...', err);
+            setAlert({ show: true, type: 'failure', message: 'message failed to send!' });
         });
 
         setName('');
@@ -25,9 +29,14 @@ const Contact: React.FC = () => {
         setMessage('');
     };
 
+    const closeAlert = () => {
+        setAlert({ show: false, type: '', message: '' });
+    }
+
     return (
         <div className="flex flex-col items-center space-y-4 justify-center pb-96">
             <h1 className='py-8 pb-7 text-amber-300 font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl'>contact</h1>
+            {alert.show && <Alert type={alert.type} message={alert.message} onClose={closeAlert}/>}
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4 bg-custom-red p-8 rounded-3xl shadow max-w-prose min-w-full sm:min-w-0 sm:w-full md:min-w-md">
                 <label className="text-amber-200">
                     name:
