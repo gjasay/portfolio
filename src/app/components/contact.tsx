@@ -52,15 +52,15 @@ const Contact: React.FC = () => {
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4 bg-custom-red p-8 rounded-3xl shadow max-w-prose min-w-full sm:min-w-0 sm:w-full md:min-w-md">
                 <label className="text-amber-200">
                     name:
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="block w-full p-2 mt-1 rounded-md bg-gray-800 text-white" />
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required={true} className="block w-full p-2 mt-1 rounded-md bg-gray-800 text-white" />
                 </label>
                 <label className="text-amber-200">
                     email:
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="block w-full p-2 mt-1 rounded-md bg-gray-800 text-white" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required={true} className="block w-full p-2 mt-1 rounded-md bg-gray-800 text-white" />
                 </label>
                 <label className="text-amber-200">
                     message:
-                    <textarea value={message} onChange={(e) => setMessage(e.target.value)} className="block w-full p-2 mt-1 rounded-md bg-gray-800 text-white h-20" />
+                    <textarea value={message} onChange={(e) => setMessage(e.target.value)} required={true} className="block w-full p-2 mt-1 rounded-md bg-gray-800 text-white h-20" />
                 </label>
                 <button type="submit" disabled={sending} className="px-4 py-2 bg-amber-300 rounded-3xl shadow text-custom-red font-extrabold text-2xl transition-colors duration-200 hover:bg-amber-400 hover:text-custom-red-dark">send</button>
             </form>
