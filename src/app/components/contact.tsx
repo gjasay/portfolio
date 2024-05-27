@@ -62,7 +62,7 @@ const Contact: React.FC = () => {
                     message:
                     <textarea value={message} onChange={(e) => setMessage(e.target.value)} className="block w-full p-2 mt-1 rounded-md bg-gray-800 text-white h-20" />
                 </label>
-                <button type="submit" className="px-4 py-2 bg-amber-300 rounded-3xl shadow text-custom-red font-extrabold text-2xl transition-colors duration-200 hover:bg-amber-400 hover:text-custom-red-dark">send</button>
+                <button type="submit" disabled={sending} className="px-4 py-2 bg-amber-300 rounded-3xl shadow text-custom-red font-extrabold text-2xl transition-colors duration-200 hover:bg-amber-400 hover:text-custom-red-dark">send</button>
             </form>
         </div>
     );
