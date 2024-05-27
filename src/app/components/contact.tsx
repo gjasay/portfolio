@@ -14,9 +14,12 @@ const Contact: React.FC = () => {
     };
 
     const [alert, setAlert] = useState<AlertState>({ show: false, type: '', message: '' });    
+    const [sending, setSending] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        setSending(true);
 
         emailjs.send('service_hwi8dcr', 'template_4z4kbcd', {
             from_name: name,
@@ -26,9 +29,11 @@ const Contact: React.FC = () => {
         .then((response: any) => {
     console.log('SUCCESS!', response.status, response.text);
     setAlert({ show: true, type: 'success', message: 'Message sent!' });
+    setSending(false);
 }, (err: any) => {
     console.log('FAILED...', err);
     setAlert({ show: true, type: 'failure', message: 'Message failed to send!' });
+    setSending(false);
 });
 
         setName('');
@@ -43,7 +48,7 @@ const Contact: React.FC = () => {
     return (
         <div className="flex flex-col items-center space-y-4 justify-center pb-96">
             <h1 className='py-8 pb-7 text-amber-300 font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl'>contact</h1>
-            {alert.show && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
+            {sending ? <p className="text-center text-amber-300 font-bold">sending...</p> : alert.show && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4 bg-custom-red p-8 rounded-3xl shadow max-w-prose min-w-full sm:min-w-0 sm:w-full md:min-w-md">
                 <label className="text-amber-200">
                     name:
