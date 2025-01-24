@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Skills: React.FC = () => {
-    const skills = ['Unreal', 'C++', 'Unity', 'C#', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Git'];
+    const skills = ['Unity', 'C#', 'HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Git'];
 
     return (
         <div className="flex flex-col items-center space-y-4  justify-center">
