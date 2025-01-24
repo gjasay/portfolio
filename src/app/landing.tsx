@@ -29,11 +29,11 @@ const Landing: FC = () => {
                     />
                     </h1>
                     <h2 className='text-2xl sm:text-2xl md:text-3xl lg:text-4xl text-center font-extrabold text-amber-300'>
-                        game programmer
+                        software engineer
                     </h2>
                     <text>
                         <p className='text-center text-xs sm:text-sm md:text-base lg:text-lg text-amber-200 py-8'>
-                        i'm a software engineer who loves making fun and exciting game mechanics <br />
+                        i'm a software engineer who loves making fun and exciting games <br />
                         always eager to learn and grow, i'm constantly exploring new ideas and techniques <br />
                         </p>
                     </text>
